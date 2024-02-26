@@ -4,10 +4,34 @@ import { Products } from "./data/dataProduct";
 import Form from "./components/Form";
 
 const App = () => {
+
+  const initialStateData = {
+    nama: "",
+    deskripsi: "",
+    image: ""
+  }
+
+  const [products, setProducts] = useState(Products)
+  const [data, setData] = useState(initialStateData)
+  const {nama, deskripsi, image} = data
+
   const [addProduct, setAddProduct] = useState(false);
+
 
   function falseAddProduct() {
     setAddProduct(!addProduct);
+  }
+  function handleOnchange(e){
+    setData({
+      ...data,
+      id: products.length + 1,
+      [e.target.name]: e.target.value,
+    });
+  }
+  function handleSubmit(e){
+    e.preventDefault();
+    setProducts([...products, data]);
+    setData(initialStateData);
   }
 
   return (
@@ -15,7 +39,7 @@ const App = () => {
       <h2 className="text-2xl font-bold text-center py-5">Dimas Skincare</h2>
       <div className="m-10">
         <div className="flex justify-end">
-          <button onClick={falseAddProduct} className="border-2 p-1">
+          <button onClick={falseAddProduct} className="border-2 p-1 flex">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -29,12 +53,13 @@ const App = () => {
               />
             </svg>
             {addProduct == true ? "close form" : "show form"}
+             
           </button>
         </div>
-        {addProduct && <Form />}
+        {addProduct && <Form name={nama} description={deskripsi} imageURL={image} onChange={handleOnchange} onSubmit={handleSubmit} />}
       </div>
       <div className="grid grid-cols-4 m-10 gap-5">
-        {Products.map((product) => (
+        {products.map((product) => (
           <Card
             key={product.id}
             image={product.image}
