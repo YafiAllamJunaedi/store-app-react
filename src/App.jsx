@@ -39,7 +39,7 @@ const App = () => {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold text-center py-5">Dimas Skincare</h2>
+      <h2 className="text-2xl font-bold text-center py-5">Dimas TRAVEL</h2>
       <div className="m-10">
         <div className="flex justify-end">
           <button onClick={falseAddProduct} className="border-2 p-1 flex">
