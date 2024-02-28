@@ -26,7 +26,13 @@ const App = () => {
       id: products.length + 1,
       [e.target.name]: e.target.value,
     });
-  }
+  }                                       //* {
+                                          //*  id: <>,
+                                          //*  key: value
+                                          //* }
+
+
+
   function handleSubmit(e) {
     e.preventDefault();
     setProducts([...products, data]);
