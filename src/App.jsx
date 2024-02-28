@@ -4,6 +4,7 @@ import { Products } from "./data/dataProduct";
 import Form from "./components/Form";
 
 const App = () => {
+  
   const initialStateData = {
     nama: "",
     deskripsi: "",
@@ -15,7 +16,7 @@ const App = () => {
   const { nama, deskripsi, image } = data;
   const [addProduct, setAddProduct] = useState(false);
 
-  function falseAddProduct() {
+  function falseAddProduct() { 
     setAddProduct(!addProduct);
   }
 
