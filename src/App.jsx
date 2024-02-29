@@ -5,6 +5,7 @@ import Form from "./components/Form";
 
 const App = () => {
   const initialStateData = {
+    id: null,
     nama: "",
     deskripsi: "",
     image: "",
@@ -12,7 +13,7 @@ const App = () => {
 
   const [products, setProducts] = useState(Products);
   const [data, setData] = useState(initialStateData);
-  const { nama, deskripsi, image } = data;
+  const { id, nama, deskripsi, image } = data;
   const [addProduct, setAddProduct] = useState(false);
 
   function falseAddProduct() {
@@ -22,7 +23,6 @@ const App = () => {
   function handleOnchange(e) {
     setData({
       ...data,
-      id: products.length + 1,
       [e.target.name]: e.target.value,
     });
   } //* {
@@ -32,12 +32,22 @@ const App = () => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    setProducts([...products, data]);
+    if (id) {
+      const updatedProduct = products.map((product) => (product.id === id ? data : product));
+      setProducts(updatedProduct);
+    } else {
+      setProducts([...products, { ...data, id: products.length + 1 }]);
+    }
     setData(initialStateData);
   }
   function handleDelete(id) {
     const filteredItem = products.filter((item) => item.id != id);
     setProducts(filteredItem);
+  }
+  function handleEdit(productId) {
+    const productToEdit = products.find((product) => product.id === productId);
+    setData(productToEdit);
+    setAddProduct(true);
   }
 
   return (
@@ -79,6 +89,7 @@ const App = () => {
             title={product.nama}
             description={product.deskripsi}
             onclick={() => handleDelete(product.id)}
+            onEdit={() => handleEdit(product.id)}
           />
         ))}
       </div>
