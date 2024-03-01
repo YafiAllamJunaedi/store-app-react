@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Card from "./components/Card";
 import { Products } from "./data/dataProduct";
 import Form from "./components/Form";
+import RecheckItem from "./components/RecheckItem";
 
 const App = () => {
   const initialStateData = {
@@ -15,9 +16,13 @@ const App = () => {
   const [data, setData] = useState(initialStateData);
   const { id, nama, deskripsi, image } = data;
   const [addProduct, setAddProduct] = useState(false);
+  const [showCart, setShowCart] = useState(false);
 
   function falseAddProduct() {
     setAddProduct(!addProduct);
+  }
+  function falseBuyNow() {
+    setShowCart(!showCart);
   }
 
   function handleOnchange(e) {
@@ -33,7 +38,9 @@ const App = () => {
   function handleSubmit(e) {
     e.preventDefault();
     if (id) {
-      const updatedProduct = products.map((product) => (product.id === id ? data : product));
+      const updatedProduct = products.map((product) =>
+        product.id === id ? data : product
+      );
       setProducts(updatedProduct);
     } else {
       setProducts([...products, { ...data, id: products.length + 1 }]);
@@ -49,10 +56,12 @@ const App = () => {
     setData(productToEdit);
     setAddProduct(true);
   }
+  // function handleBuyNow() {}
 
   return (
     <div>
       <h2 className="text-2xl font-bold text-center py-5">Dimas TRAVEL</h2>
+      {showCart && <RecheckItem />}
       <div className="m-10">
         <div className="flex justify-end">
           <button onClick={falseAddProduct} className="border-2 p-1 flex">
@@ -90,6 +99,7 @@ const App = () => {
             description={product.deskripsi}
             onclick={() => handleDelete(product.id)}
             onEdit={() => handleEdit(product.id)}
+            buyNow={falseBuyNow}
           />
         ))}
       </div>
