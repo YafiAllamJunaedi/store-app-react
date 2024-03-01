@@ -21,7 +21,7 @@ const App = () => {
   function falseAddProduct() {
     setAddProduct(!addProduct);
   }
-  function falseBuyNow() {
+  function falseShowCart() {
     setShowCart(!showCart);
   }
 
@@ -30,7 +30,9 @@ const App = () => {
       ...data,
       [e.target.name]: e.target.value,
     });
-  } //* {
+  } 
+  
+  //* {
   //*  id: <>,
   //*  key: value
   //* }
@@ -99,7 +101,7 @@ const App = () => {
             description={product.deskripsi}
             onclick={() => handleDelete(product.id)}
             onEdit={() => handleEdit(product.id)}
-            buyNow={falseBuyNow}
+            buyNow={falseShowCart}
           />
         ))}
       </div>

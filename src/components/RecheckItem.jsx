@@ -1,17 +1,13 @@
 import React from "react";
 
-const RecheckItem = ({item, price, productName, imageProduct}) => {
+const RecheckItem = ({ item, price, productName, imageProduct }) => {
   return (
-    <div className="">
-      <p className="text-2xl pb-1 font-semibold border-b-2 border-slate-200 mb-7">
+    <div className="w-4/5 mx-auto">
+      <p className="text-2xl pb-1 font-semibold border-b-2 border-slate-400 mb-7">
         List Items
       </p>
       <div className="flex items-center gap-x-5">
-        <img
-          className="rounded-sm w-40 mt-7"
-          src={imageProduct}
-          alt=""
-        />
+        <img className="rounded-sm w-40 mt-7" src={imageProduct} alt="" />
         <div className="mt-5">
           <p className="text-base font-semibold">{productName}</p>
           <p className="text-base font-semibold">{price}</p>
@@ -53,7 +49,7 @@ const RecheckItem = ({item, price, productName, imageProduct}) => {
         </div>
       </div>
 
-      <div className="border-b-2 border-slate-200 mt-10"></div>
+      <div className="border-b-2 border-slate-400 mt-10"></div>
     </div>
   );
 };
