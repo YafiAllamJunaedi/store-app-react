@@ -58,11 +58,10 @@ const App = () => {
     setData(productToEdit);
     setAddProduct(true);
   }
-  // function handleBuyNow() {}
 
   return (
     <div>
-      <h2 className="text-2xl font-bold text-center py-5">Dimas TRAVEL</h2>
+      <h2 className="text-2xl font-bold text-center py-5">Dimas Travel</h2>
       {showCart && <RecheckItem />}
       <div className="m-10">
         <div className="flex justify-end">
@@ -71,7 +70,7 @@ const App = () => {
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               fill="currentColor"
-              className="w-6 h-6"
+              className="w-6 h-6 mr-2"
             >
               <path
                 fillRule="evenodd"
@@ -79,7 +78,7 @@ const App = () => {
                 clipRule="evenodd"
               />
             </svg>
-            {addProduct == true ? "close form" : "show form"}
+            {addProduct == true ? "Tutup Form" : "Tambah Travel"}
           </button>
         </div>
         {addProduct && (

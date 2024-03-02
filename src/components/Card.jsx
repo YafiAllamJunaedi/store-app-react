@@ -2,7 +2,7 @@ const Card = ({ image, title, description, onclick, onEdit, buyNow }) => {
   return (
     <div className=" shadow-xl pb-2 rounded-lg">
       <img
-        className="w-full h-64 object-cover rounded-t-lg"
+        className="w-full h-60 object-cover rounded-t-lg"
         src={image}
         alt=""
       />
@@ -21,7 +21,7 @@ const Card = ({ image, title, description, onclick, onEdit, buyNow }) => {
         </button>
 
         <div className="flex gap-x-3">
-          <div className="border-2 border-slate-300 px-3 py-1 rounded-lg">
+          <div className="rounded-lg">
             <button onClick={onEdit}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -34,7 +34,7 @@ const Card = ({ image, title, description, onclick, onEdit, buyNow }) => {
               </svg>
             </button>
           </div>
-          <div className="border-2 border-slate-300 px-3 py-1 rounded-lg">
+          <div className="rounded-lg">
             <button onClick={onclick}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
