@@ -55,6 +55,7 @@ const App = () => {
       {
         id: items.id,
         nama: items.nama,
+        image: items.image,
       },
     ]);
   }
@@ -91,11 +92,17 @@ const App = () => {
           </>
         ) : (
           <>
-            {showCart.map((cart) => (
-              <div key={cart.id}>
-                <p>{cart.nama}</p>
-              </div>
-            ))}
+            <div className="mx-auto border p-5 border-slate-500 w-4/5 mt-5">
+              <h2 className="text-center font-medium text-xl">Lists Travel</h2>
+
+              {showCart.map((cart) => (
+                <RecheckItem
+                  key={cart.id}
+                  itemName={cart.nama}
+                  img={cart.image}
+                />
+              ))}
+            </div>
           </>
         )}
 
@@ -118,7 +125,7 @@ const App = () => {
             description={product.deskripsi}
             onclick={() => handleDelete(product.id)}
             onEdit={() => handleEdit(product.id)}
-            buyNow={() => handleCart(product.id)}
+            buyNow={() => handleCart(product)}
           />
         ))}
       </div>
