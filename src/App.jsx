@@ -11,18 +11,14 @@ const App = () => {
     deskripsi: "",
     image: "",
   };
-
   const [products, setProducts] = useState(Products);
   const [data, setData] = useState(initialStateData);
   const { id, nama, deskripsi, image } = data;
   const [addProduct, setAddProduct] = useState(false);
-  const [showCart, setShowCart] = useState(false);
+  const [addCart, setAddCart] = useState([]);
 
   function falseAddProduct() {
     setAddProduct(!addProduct);
-  }
-  function falseShowCart() {
-    setShowCart(!showCart);
   }
 
   function handleOnchange(e) {
@@ -30,8 +26,8 @@ const App = () => {
       ...data,
       [e.target.name]: e.target.value,
     });
-  } 
-  
+  }
+
   //* {
   //*  id: <>,
   //*  key: value
@@ -58,12 +54,29 @@ const App = () => {
     setData(productToEdit);
     setAddProduct(true);
   }
-  // function handleBuyNow() {}
+  function handleCart(product) {
+    setAddCart([
+      ...data,
+      {
+        id: product.id,
+        name: product.nama,
+      },
+    ]);
+  }
 
   return (
     <div>
       <h2 className="text-2xl font-bold text-center py-5">Dimas TRAVEL</h2>
-      {showCart && <RecheckItem />}
+      <div className="w-4/5 border mx-auto mt-10 p-5">
+        <div className="flex">
+          {addCart.map((cart) => (
+            <>
+              <p>{products.name}</p>
+              <p>{products.name}</p>
+            </>
+          ))}
+        </div>
+      </div>
       <div className="m-10">
         <div className="flex justify-end">
           <button onClick={falseAddProduct} className="border-2 p-1 flex">
@@ -101,7 +114,7 @@ const App = () => {
             description={product.deskripsi}
             onclick={() => handleDelete(product.id)}
             onEdit={() => handleEdit(product.id)}
-            buyNow={falseShowCart}
+            buyNow={() => handleCart(product.id)}
           />
         ))}
       </div>
