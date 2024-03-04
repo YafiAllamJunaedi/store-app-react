@@ -17,7 +17,7 @@ export const Products = [
       id: 3,
       image:
         "https://images.unsplash.com/photo-1570161766218-f8488ebb8078?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        nama: "Swiss Travel",
+        nama: "Switzerland Travel",
       deskripsi: "Nikmati perlajanan 5 hari 5 malam di Swiss",
     },
     {
@@ -31,7 +31,7 @@ export const Products = [
       id: 5,
       image:
         "https://plus.unsplash.com/premium_photo-1680284197408-0f83f185818b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      nama: "Amerika Travel",
+      nama: "America Travel",
       deskripsi: "Nikmati perjalanan 7 hari 6 malam di Amerika",
     },
 ];

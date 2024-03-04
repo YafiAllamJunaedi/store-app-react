@@ -11,7 +11,7 @@ const Card = ({ image, title, description, onclick, onEdit, buyNow }) => {
         <p className="mt-5 text-slate-600">{description}</p>
       </div>
 
-      <div className="flex m-5">
+      <div className="flex m-5 gap-x-14">
         {/* Button Buy Now */}
         <button
           onClick={buyNow}

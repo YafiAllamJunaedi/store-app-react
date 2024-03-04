@@ -16,13 +16,10 @@ const App = () => {
   const [data, setData] = useState(initialStateData);
   const { id, nama, deskripsi, image } = data;
   const [addProduct, setAddProduct] = useState(false);
-  const [showCart, setShowCart] = useState(false);
+  const [showCart, setShowCart] = useState([]);
 
   function falseAddProduct() {
     setAddProduct(!addProduct);
-  }
-  function falseShowCart() {
-    setShowCart(!showCart);
   }
 
   function handleOnchange(e) {
@@ -30,12 +27,7 @@ const App = () => {
       ...data,
       [e.target.name]: e.target.value,
     });
-  } 
-  
-  //* {
-  //*  id: <>,
-  //*  key: value
-  //* }
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -58,11 +50,19 @@ const App = () => {
     setData(productToEdit);
     setAddProduct(true);
   }
+  function handleCart(items) {
+    setShowCart([
+      ...showCart,
+      {
+        id: items.id,
+        nama: items.nama,
+      },
+    ]);
+  }
 
   return (
     <div>
       <h2 className="text-2xl font-bold text-center py-5">Dimas Travel</h2>
-      {showCart && <RecheckItem />}
       <div className="m-10">
         <div className="flex justify-end">
           <button onClick={falseAddProduct} className="border-2 p-1 flex">
@@ -81,6 +81,25 @@ const App = () => {
             {addProduct == true ? "Tutup Form" : "Tambah Travel"}
           </button>
         </div>
+        {showCart.length === 0 ? (
+          <>
+            <div className="mx-auto w-4/5 border-2 mt-8">
+              <p className="text-lg font-medium text-center">Lists Travel</p>
+              <p className="text-base text-slate-400 text-cente italic text-center">
+                Empty
+              </p>
+            </div>
+          </>
+        ) : (
+          <>
+            {showCart.map((cart) => (
+              <div key={cart.id}>
+                <p>{cart.nama}</p>
+              </div>
+            ))}
+          </>
+        )}
+
         {addProduct && (
           <Form
             name={nama}
@@ -100,7 +119,7 @@ const App = () => {
             description={product.deskripsi}
             onclick={() => handleDelete(product.id)}
             onEdit={() => handleEdit(product.id)}
-            buyNow={falseShowCart}
+            buyNow={() => handleCart(product.id)}
           />
         ))}
       </div>
