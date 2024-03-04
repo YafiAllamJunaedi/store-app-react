@@ -15,7 +15,7 @@ const App = () => {
   const [data, setData] = useState(initialStateData);
   const { id, nama, deskripsi, image } = data;
   const [addProduct, setAddProduct] = useState(false);
-  const [addCart, setAddCart] = useState([]);
+  const [showCart, setShowCart] = useState([]);
 
   function falseAddProduct() {
     setAddProduct(!addProduct);
@@ -27,11 +27,6 @@ const App = () => {
       [e.target.name]: e.target.value,
     });
   }
-
-  //* {
-  //*  id: <>,
-  //*  key: value
-  //* }
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -54,29 +49,19 @@ const App = () => {
     setData(productToEdit);
     setAddProduct(true);
   }
-  function handleCart(product) {
-    setAddCart([
-      ...data,
+  function handleCart(items) {
+    setShowCart([
+      ...showCart,
       {
-        id: product.id,
-        name: product.nama,
+        id: items.id,
+        nama: items.nama,
       },
     ]);
   }
 
   return (
     <div>
-      <h2 className="text-2xl font-bold text-center py-5">Dimas TRAVEL</h2>
-      <div className="w-4/5 border mx-auto mt-10 p-5">
-        <div className="flex">
-          {addCart.map((cart) => (
-            <>
-              <p>{products.name}</p>
-              <p>{products.name}</p>
-            </>
-          ))}
-        </div>
-      </div>
+      <h2 className="text-2xl font-bold text-center py-5">Dimas Travel</h2>
       <div className="m-10">
         <div className="flex justify-end">
           <button onClick={falseAddProduct} className="border-2 p-1 flex">
@@ -84,7 +69,7 @@ const App = () => {
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               fill="currentColor"
-              className="w-6 h-6"
+              className="w-6 h-6 mr-2"
             >
               <path
                 fillRule="evenodd"
@@ -92,9 +77,28 @@ const App = () => {
                 clipRule="evenodd"
               />
             </svg>
-            {addProduct == true ? "close form" : "show form"}
+            {addProduct == true ? "Tutup Form" : "Tambah Travel"}
           </button>
         </div>
+        {showCart.length === 0 ? (
+          <>
+            <div className="mx-auto w-4/5 border-2 mt-8">
+              <p className="text-lg font-medium text-center">Lists Travel</p>
+              <p className="text-base text-slate-400 text-cente italic text-center">
+                Empty
+              </p>
+            </div>
+          </>
+        ) : (
+          <>
+            {showCart.map((cart) => (
+              <div key={cart.id}>
+                <p>{cart.nama}</p>
+              </div>
+            ))}
+          </>
+        )}
+
         {addProduct && (
           <Form
             name={nama}
