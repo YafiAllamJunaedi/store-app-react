@@ -1,4 +1,4 @@
-const Card = ({ image, title, description, onclick, onEdit, buyNow }) => {
+const Card = ({ image, title, description, price, onclick, onEdit, buyNow }) => {
   return (
     <div className=" shadow-xl pb-2 rounded-lg">
       <img
@@ -9,6 +9,7 @@ const Card = ({ image, title, description, onclick, onEdit, buyNow }) => {
       <div className="m-5">
         <p className="text-base font-semibold">{title}</p>
         <p className="mt-5 text-slate-600">{description}</p>
+        <p className="mt-3 text-base font-bold">{price}</p>
       </div>
 
       <div className="flex m-5 gap-x-14">

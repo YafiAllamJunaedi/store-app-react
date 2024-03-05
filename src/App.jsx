@@ -9,18 +9,25 @@ const App = () => {
     id: null,
     nama: "",
     deskripsi: "",
+    price: "",
     image: "",
   };
   const [products, setProducts] = useState(Products);
   const [data, setData] = useState(initialStateData);
-  const { id, nama, deskripsi, image } = data;
+  const { id, nama, deskripsi, image, price } = data;
   const [addProduct, setAddProduct] = useState(false);
   const [showCart, setShowCart] = useState([]);
+  const [quantity, setQuantity] = useState(1);
 
   function falseAddProduct() {
     setAddProduct(!addProduct);
   }
-
+  function incrementQuantity() {
+    setQuantity(quantity + 1);
+  }
+  function decrementQuantity() {
+    setQuantity(quantity - 1);
+  }
   function handleOnchange(e) {
     setData({
       ...data,
@@ -56,6 +63,7 @@ const App = () => {
         id: items.id,
         nama: items.nama,
         image: items.image,
+        price: items.price,
       },
     ]);
   }
@@ -84,7 +92,7 @@ const App = () => {
         {showCart.length === 0 ? (
           <>
             <div className="mx-auto w-4/5 border-2 mt-8">
-              <p className="text-lg font-medium text-center">Lists Travel</p>
+              <p className="text-lg font-medium text-center">Travel Lists</p>
               <p className="text-base text-slate-400 text-cente italic text-center">
                 Empty
               </p>
@@ -93,13 +101,16 @@ const App = () => {
         ) : (
           <>
             <div className="mx-auto border p-5 border-slate-500 w-4/5 mt-5">
-              <h2 className="text-center font-medium text-xl">Lists Travel</h2>
+              <h2 className="text-center font-medium text-xl">Travel Lists</h2>
 
               {showCart.map((cart) => (
                 <RecheckItem
                   key={cart.id}
                   itemName={cart.nama}
+                  itemPrice={cart.price}
                   img={cart.image}
+                  quantity={quantity}
+                  plus={incrementQuantity}
                 />
               ))}
             </div>
@@ -111,6 +122,7 @@ const App = () => {
             name={nama}
             description={deskripsi}
             imageURL={image}
+            price={price}
             onChange={handleOnchange}
             onSubmit={handleSubmit}
           />
@@ -123,6 +135,7 @@ const App = () => {
             image={product.image}
             title={product.nama}
             description={product.deskripsi}
+            price={product.price}
             onclick={() => handleDelete(product.id)}
             onEdit={() => handleEdit(product.id)}
             buyNow={() => handleCart(product)}

@@ -1,6 +1,6 @@
 import React from "react";
 
-const Form = ({ name, description, imageURL, onChange, onSubmit }) => {
+const Form = ({ name, description, price, imageURL, onChange, onSubmit }) => {
   return (
     <>
       <div className="flex justify-center">
@@ -20,6 +20,14 @@ const Form = ({ name, description, imageURL, onChange, onSubmit }) => {
               name="deskripsi"
               placeholder="Description"
               value={description}
+              onChange={onChange}
+            />
+            <input
+              className="border-2 w-96"
+              type="text"
+              name="price"
+              placeholder="Price"
+              value={price}
               onChange={onChange}
             />
             <input
