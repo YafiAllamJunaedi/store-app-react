@@ -12,15 +12,11 @@ const RecheckItem = ({
   return (
     <div className="" key={key}>
       <div className="flex m-5">
-        <img
-          src={img}
-          alt=""
-          className="w-28 h-20 rounded-md border-4 border-slate-600"
-        />
+        <img src={img} alt="" className="w-28 h-20 rounded-md object-contain" />
 
         <div className="ml-5">
           <p className="text-base font-medium">{itemName}</p>
-          <p className="font-bold">{itemPrice}</p>
+          <p className="font-bold">${itemPrice}</p>
 
           <div className="flex gap-2 mt-1">
             {quantity <= 1 ? (

@@ -3,21 +3,29 @@ import Card from "./components/Card";
 import { Products } from "./data/dataProduct";
 import Form from "./components/Form";
 import RecheckItem from "./components/RecheckItem";
+import { useEffect } from "react";
 
 const App = () => {
   const initialStateData = {
     id: null,
-    nama: "",
+    title: "",
     deskripsi: "",
     price: "",
     image: "",
   };
-  const [products, setProducts] = useState(Products);
+  const [products, setProducts] = useState([]);
   const [data, setData] = useState(initialStateData);
-  const { id, nama, deskripsi, image, price } = data;
+  const { id, title, deskripsi, image, price } = data;
   const [addProduct, setAddProduct] = useState(false);
   const [showCart, setShowCart] = useState([]);
   const [quantity, setQuantity] = useState(1);
+
+  useEffect(() => {
+    fetch("https://fakestoreapi.com/products")
+      .then((res) => res.json())
+      .then((json) => setProducts(json));
+    console.log(products);
+  }, []);
 
   function falseAddProduct() {
     setAddProduct(!addProduct);
@@ -61,7 +69,7 @@ const App = () => {
       ...showCart,
       {
         id: items.id,
-        nama: items.nama,
+        title: items.title,
         image: items.image,
         price: items.price,
       },
@@ -69,8 +77,8 @@ const App = () => {
   }
 
   return (
-    <div>
-      <h2 className="text-2xl font-bold text-center py-5">Dimas Travel</h2>
+    <div className="">
+      <h2 className="text-2xl font-bold text-center py-5">Dimas Store</h2>
       <div className="m-10">
         <div className="flex justify-end">
           <button onClick={falseAddProduct} className="border-2 p-1 flex">
@@ -92,7 +100,7 @@ const App = () => {
         {showCart.length === 0 ? (
           <>
             <div className="mx-auto w-4/5 border-2 mt-8">
-              <p className="text-lg font-medium text-center">Travel Lists</p>
+              <p className="text-lg font-medium text-center">Products list</p>
               <p className="text-base text-slate-400 text-cente italic text-center">
                 Empty
               </p>
@@ -101,16 +109,17 @@ const App = () => {
         ) : (
           <>
             <div className="mx-auto border p-5 border-slate-500 w-4/5 mt-5">
-              <h2 className="text-center font-medium text-xl">Travel Lists</h2>
+              <h2 className="text-center font-medium text-xl">Products List</h2>
 
               {showCart.map((cart) => (
                 <RecheckItem
                   key={cart.id}
-                  itemName={cart.nama}
+                  itemName={cart.title}
                   itemPrice={cart.price}
                   img={cart.image}
                   quantity={quantity}
                   plus={incrementQuantity}
+                  minus={decrementQuantity}
                 />
               ))}
             </div>
@@ -119,7 +128,7 @@ const App = () => {
 
         {addProduct && (
           <Form
-            name={nama}
+            name={title}
             description={deskripsi}
             imageURL={image}
             price={price}
@@ -133,9 +142,9 @@ const App = () => {
           <Card
             key={product.id}
             image={product.image}
-            title={product.nama}
-            description={product.deskripsi}
-            price={product.price}
+            title={product.title}
+            // description={product.description}
+            price={"$ " + product.price}
             onclick={() => handleDelete(product.id)}
             onEdit={() => handleEdit(product.id)}
             buyNow={() => handleCart(product)}
