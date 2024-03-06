@@ -17,7 +17,7 @@ const Form = ({ name, description, price, imageURL, onChange, onSubmit }) => {
             <input
               className="border-2 w-96"
               type="text"
-              name="deskripsi"
+              name="description"
               placeholder="Description"
               value={description}
               onChange={onChange}

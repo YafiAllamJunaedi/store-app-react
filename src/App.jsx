@@ -9,22 +9,25 @@ const App = () => {
   const initialStateData = {
     id: null,
     title: "",
-    deskripsi: "",
+    description: "",
     price: "",
     image: "",
   };
   const [products, setProducts] = useState([]);
   const [data, setData] = useState(initialStateData);
-  const { id, title, deskripsi, image, price } = data;
+  const { id, title, description, image, price } = data;
   const [addProduct, setAddProduct] = useState(false);
   const [showCart, setShowCart] = useState([]);
   const [quantity, setQuantity] = useState(1);
 
+  async function fetchAPI() {
+    const getData = await fetch("https://fakestoreapi.com/products");
+    const respond = await getData.json();
+    setProducts(respond);
+  }
+
   useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
-      .then((res) => res.json())
-      .then((json) => setProducts(json));
-    console.log(products);
+    fetchAPI();
   }, []);
 
   function falseAddProduct() {
@@ -129,7 +132,7 @@ const App = () => {
         {addProduct && (
           <Form
             name={title}
-            description={deskripsi}
+            description={description}
             imageURL={image}
             price={price}
             onChange={handleOnchange}
@@ -143,7 +146,7 @@ const App = () => {
             key={product.id}
             image={product.image}
             title={product.title}
-            // description={product.description}
+            description={product.description.substring(0, 250)} 
             price={"$ " + product.price}
             onclick={() => handleDelete(product.id)}
             onEdit={() => handleEdit(product.id)}

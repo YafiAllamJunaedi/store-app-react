@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 const Card = ({
   image,
   title,
@@ -7,6 +9,10 @@ const Card = ({
   onEdit,
   buyNow,
 }) => {
+  const [showMore, setShowMore] = useState(false);
+  function oppositeShowMore() {
+    setShowMore(!showMore);
+  }
   return (
     <div className=" shadow-xl pb-2 rounded-lg flex flex-col justify-between">
       <img
