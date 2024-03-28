@@ -10,19 +10,35 @@ const Card = ({
   buyNow,
 }) => {
   const [showMore, setShowMore] = useState(false);
-  function oppositeShowMore() {
-    setShowMore(!showMore);
+  const [showAll, setShowAll] = useState(description);
+  function handleShowMore() {
+    setShowMore((showMore) => !showMore);
   }
+
   return (
-    <div className=" shadow-xl pb-2 rounded-lg flex flex-col justify-between">
-      <img
+    <div
+      className={`shadow-xl pb-2 rounded-lg flex flex-col justify-between ${
+        showMore ? "h-auto" : "h-5/6"
+      }`}
+    >
+      <img        
         className="w-full h-60 object-contain rounded-t-lg"
         src={image}
         alt=""
       />
       <div className="m-5">
         <p className="text-base font-semibold">{title}</p>
-        <p className="mt-5 text-slate-600">{description}</p>
+
+        {showMore ? (
+          <p className="mt-3 text-base ">{description}</p>
+        ) : (
+          description.substring(0, 50)
+        )}
+        <div className="flex justify-end text-blue-600">
+          <button onClick={handleShowMore} className="italic">
+            {showMore ? "Show Less..." : "show more..."}
+          </button>
+        </div>
         <p className="mt-3 text-base font-bold">{price}</p>
       </div>
 

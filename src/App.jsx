@@ -7,18 +7,20 @@ import { useEffect } from "react";
 
 const App = () => {
   const initialStateData = {
-    id: null,
-    title: "",
+    id: null,                                                
+    title: "",                                                
     description: "",
-    price: "",
-    image: "",
+    price: "",                                                
+    image: "",                                                
   };
+
   const [products, setProducts] = useState([]);
   const [data, setData] = useState(initialStateData);
   const { id, title, description, image, price } = data;
   const [addProduct, setAddProduct] = useState(false);
   const [showCart, setShowCart] = useState([]);
   const [quantity, setQuantity] = useState(1);
+  const [showMore, setShowMore] = useState(false);
 
   async function fetchAPI() {
     const getData = await fetch("https://fakestoreapi.com/products");
@@ -44,6 +46,9 @@ const App = () => {
       ...data,
       [e.target.name]: e.target.value,
     });
+  }
+  function oppositeShowMore() {
+    setShowMore(!showMore);
   }
 
   function handleSubmit(e) {
@@ -146,7 +151,7 @@ const App = () => {
             key={product.id}
             image={product.image}
             title={product.title}
-            description={product.description.substring(0, 250)} 
+            description={product.description}
             price={"$ " + product.price}
             onclick={() => handleDelete(product.id)}
             onEdit={() => handleEdit(product.id)}
